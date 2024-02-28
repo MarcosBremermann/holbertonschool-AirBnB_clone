@@ -4,6 +4,7 @@ This is a file for the class BaseModel
 """
 from datetime import datetime
 import uuid
+import models
 
 
 class BaseModel:
@@ -21,7 +22,7 @@ class BaseModel:
         self.updated_at = datetime.now()
         if kwargs:
             for key, value in kwargs.items():
-                if key != '__class':
+                if key != '__class__':
                     setattr(self, key, value)
 
         else:
