@@ -13,7 +13,7 @@ class BaseModel:
     classes inherit from
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """
         Initialization
         """
