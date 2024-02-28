@@ -4,7 +4,7 @@ This is a file for the class BaseModel
 """
 from datetime import datetime
 import uuid
-import models
+from models import storage
 
 
 class BaseModel:
