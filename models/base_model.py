@@ -20,7 +20,7 @@ class BaseModel:
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
 
-    def str(self):
+    def __str__(self):
         """
         should print: [<class name>] (<self.id>) <self.__dict__>
         """
