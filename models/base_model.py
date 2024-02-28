@@ -22,11 +22,11 @@ class BaseModel:
         self.updated_at = datetime.now()
         if kwargs:
             for key, value in kwargs.items():
-                if key != '__class__':
-                    setattr(self, key, value)
-
-        else:
-            models.storage,new(self)
+                if key == "__class__":
+                    continue
+                elif key == "created_at" or key == "updated_at":
+                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                setattr(self, key, value)
 
     def __str__(self):
         """
