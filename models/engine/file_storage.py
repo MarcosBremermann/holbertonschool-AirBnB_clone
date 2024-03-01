@@ -35,11 +35,10 @@ class FileStorage:
 
     def reload(self):
         """Deserializes the JSON file to __objects"""
-        if path.exists(self.__file_path):
-            with open(self.__file_path, "r") as file:
-                data = json.load(file)
-                for key, value in data.items():
-                    class_name, obj_id = key.split(".")
-                    cls = globals()[class_name]
-                    obj = cls(**value)
-                    self.__objects[key] = obj
+        try:
+            with open(self.__file_path, "r", encoding="utf-8") as file:
+                for key, value in json.load(file).items():
+                    value = eval(key.split(".")[0])(**value)
+                    self.__objects[key] = value
+        except FileNotFoundError:
+            pass
