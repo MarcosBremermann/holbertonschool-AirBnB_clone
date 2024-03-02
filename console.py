@@ -10,7 +10,6 @@ from models.user import User
 import json
 
 
-
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
 
