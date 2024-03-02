@@ -2,7 +2,7 @@
 
 <div align="center">
   <a href="https://holbertonschool.uy">
-    <img src="https://www.reddit.com/user/eLPeper/comments/1b52aj2/ignore_one_more_time/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button" align="center" height="250" width="600">
+    <img src="https://holberton.anahuac.mx/wp-content/uploads/ddd-1024x1024.png" align="center" height="600" width="600">
   </a>
 </div>
 
@@ -13,7 +13,7 @@ This repository is for the Console project of the AirBnB module in Holberton Sch
 Diagram of the project:
 
 <div align="center">
-    <img src="https://www.reddit.com/user/eLPeper/comments/1b52a0i/ignore_this_yet_again/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button" align="center" height="250" width="600">
+    <img src="https://peytonbrsmith.netlify.app/projects/web/airbnb/06fccc41df40ab8f9d49.png" align="center" height="250" width="600">
 </div>
 
 # **Instalation**
