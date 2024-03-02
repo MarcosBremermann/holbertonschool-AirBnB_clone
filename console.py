@@ -14,7 +14,17 @@ from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
+    """HBNBCommand class"""
     prompt = '(hbnb) '
+    classes = {
+        "BaseModel": BaseModel,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
+        "Place": Place,
+        "Review": Review,
+        "User": User
+    }
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
@@ -126,26 +136,5 @@ class HBNBCommand(cmd.Cmd):
             return
         setattr(storage.all()[key], args[2], args[3])
         storage.save()
-
-    def do_create_user(self, arg):
-        """Create a new instance of User"""
-        self.do_create("User " + arg)
-
-    def do_show_user(self, arg):
-        """Prints the string representation of an instance of User"""
-        self.do_show("User " + arg)
-
-    def do_destroy_user(self, arg):
-        """Deletes an instance of User"""
-        self.do_destroy("User " + arg)
-
-    def do_all_user(self, arg):
-        """Prints all string representation of instances of User"""
-        self.do_all("User")
-
-    def do_update_user(self, arg):
-        """Updates an instance of User"""
-        self.do_update("User " + arg)
-
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
