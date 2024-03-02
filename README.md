@@ -2,7 +2,7 @@
 
 <div align="center">
   <a href="https://holbertonschool.uy">
-    <img src="https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2018/6/65f4a1dd9c51265f49d0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20240302%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20240302T174629Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=2028e3527c040a64ad9d44a592eac093aad22d8c7f084d44b150724e7a93fa34" align="center" height="250" width="600" />
+    <img src="https://shorturl.at/fYZ69" align="center" height="250" width="600" />
   </a>
 </div>
 
@@ -13,7 +13,7 @@ This repository is for the Console project of the AirBnB module in Holberton Sch
 Diagram of the project:
 
 <div align="center">
-    <img src="https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2018/6/815046647d23428a14ca.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20240302%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20240302T174629Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=737c4d3e95ae73f61e656cc0e613e115d854c22ec59912996495c5c7c86d5441" align="center" height="250" width="600">
+    <img src="https://shorturl.at/FGQT4" align="center" height="250" width="600">
 </div>
 
 # **Instalation**
