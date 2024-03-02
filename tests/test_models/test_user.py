@@ -24,10 +24,10 @@ class TestUser(unittest.TestCase):
     
     def test_user_attributes_defaults(self):
         user = User()
-        self.assertEqual(user.email, "")
-        self.assertEqual(user.password, "")
-        self.assertEqual(user.first_name, "")
-        self.assertEqual(user.last_name, "")
+        self.assertEqual(user.email, "Pepito@gmail.com")
+        self.assertEqual(user.password, "pepito123")
+        self.assertEqual(user.first_name, "pepito")
+        self.assertEqual(user.last_name, "De la rosa")
 
 if __name__ == '__main__':
     unittest.main()
