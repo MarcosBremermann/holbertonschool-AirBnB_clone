@@ -1,125 +1,105 @@
 #!/usr/bin/python3
-"""
-This module contains the Console and its methods
-"""
+"""Console module"""
+
 import cmd
-from models.base_model import BaseModel
+import sys
 from models import storage
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
-    prompt = '(hbnb) '
+    """HBNBCommand class"""
 
-    def do_quit(self, arg):
-        """Quit command to exit the program"""
-        return True
-
-    def do_EOF(self, arg):
-        """Handles EOF"""
-        print()
-        return True
-
-    def emptyline(self):
-        """Do nothing on empty line"""
-        pass
+    prompt = "(hbnb) "
 
     def do_create(self, arg):
-        """Create a new instance of BaseModel"""
+        """Creates a new instance of BaseModel"""
         if not arg:
             print("** class name missing **")
-            return
-        try:
+        elif arg not in ["BaseModel", "User"]: # add more classes if necessary
+            print("** class doesn't exist **")
+        else:
             new_instance = eval(arg)()
             new_instance.save()
             print(new_instance.id)
-        except NameError:
-            print("** class doesn't exist **")
 
     def do_show(self, arg):
         """Prints the string representation of an instance"""
         args = arg.split()
         if not arg:
             print("** class name missing **")
-            return
-        try:
-            cls = eval(args[0])
-        except NameError:
+        elif args[0] not in ["BaseModel", "User"]: # add more classes if necessary
             print("** class doesn't exist **")
-            return
-        if len(args) < 2:
+        elif len(args) == 1:
             print("** instance id missing **")
-            return
-        key = args[0] + '.' + args[1]
-        if key in storage.all():
-            print(storage.all()[key])
         else:
-            print("** no instance found **")
+            obj_key = "{}.{}".format(args[0], args[1])
+            all_objects = storage.all()
+            if obj_key in all_objects:
+                print(all_objects[obj_key])
+            else:
+                print("** no instance found **")
 
     def do_destroy(self, arg):
         """Deletes an instance based on the class name and id"""
         args = arg.split()
         if not arg:
             print("** class name missing **")
-            return
-        try:
-            cls = eval(args[0])
-        except NameError:
+        elif args[0] not in ["BaseModel", "User"]: # add more classes if necessary
             print("** class doesn't exist **")
-            return
-        if len(args) < 2:
+        elif len(args) == 1:
             print("** instance id missing **")
-            return
-        key = args[0] + '.' + args[1]
-        if key in storage.all():
-            del storage.all()[key]
-            storage.save()
         else:
-            print("** no instance found **")
+            obj_key = "{}.{}".format(args[0], args[1])
+            all_objects = storage.all()
+            if obj_key in all_objects:
+                del all_objects[obj_key]
+                storage.save()
+            else:
+                print("** no instance found **")
 
     def do_all(self, arg):
         """Prints all string representation of all instances"""
         args = arg.split()
-        if args and not args[0]:
-            print("** class name missing **")
-            return
-        try:
-            cls = eval(args[0])
-        except NameError:
+        all_objects = storage.all()
+        if not arg:
+            print([str(obj) for obj in all_objects.values()])
+        elif args[0] not in ["BaseModel", "User"]: # add more classes if necessary
             print("** class doesn't exist **")
-            return
-        instances = []
-        for key, value in storage.all().items():
-            if args and key.split('.')[0] != args[0]:
-                continue
-            instances.append(str(value))
-        print(instances)
+        else:
+            print([str(obj) for key, obj in all_objects.items() if key.startswith(args[0])])
 
     def do_update(self, arg):
         """Updates an instance based on the class name and id"""
         args = arg.split()
         if not arg:
             print("** class name missing **")
-            return
-        try:
-            cls = eval(args[0])
-        except NameError:
+        elif args[0] not in ["BaseModel", "User"]: # add more classes if necessary
             print("** class doesn't exist **")
-            return
-        if len(args) < 2:
+        elif len(args) == 1:
             print("** instance id missing **")
-            return
-        key = args[0] + '.' + args[1]
-        if key not in storage.all():
-            print("** no instance found **")
-            return
-        if len(args) < 3:
+        elif len(args) == 2:
             print("** attribute name missing **")
-            return
-        if len(args) < 4:
+        elif len(args) == 3:
             print("** value missing **")
-            return
-        setattr(storage.all()[key], args[2], args[3])
-        storage.save()
+        else:
+            obj_key = "{}.{}".format(args[0], args[1])
+            all_objects = storage.all()
+            if obj_key in all_objects:
+                obj = all_objects[obj_key]
+                setattr(obj, args[2], args[3])
+                obj.save()
+            else:
+                print("** no instance found **")
+
+    def do_EOF(self, arg):
+        """EOF command to exit the program"""
+        print("")
+        return True
+
+    def do_quit(self, arg):
+        """Quit command to exit the program"""
+        return True
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
