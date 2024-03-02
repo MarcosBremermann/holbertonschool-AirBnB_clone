@@ -2,10 +2,10 @@
 """
 This is a file for the class FileStorage
 """
-from models.base_model import BaseModel
-from models.user import User
 import json
 from os import path
+from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
@@ -22,7 +22,7 @@ class FileStorage:
 
     def new(self, obj):
         """Sets in __objects the obj with key <obj class name>.id"""
-        key = obj.__class__.__name__ + "." + obj.id
+        key = f"{obj.__class__.__name__}.{obj.id}"
         self.__objects[key] = obj
 
     def save(self):
@@ -42,7 +42,10 @@ class FileStorage:
 
             for key, obj_data in data.items():
                 class_name, obj_id = key.split('.')
-                cls = globals()[class_name]
+                if class_name == 'User':
+                    cls = User
+                else:
+                    cls = globals()[class_name]
                 obj = cls(**obj_data)
                 FileStorage.__objects[key] = obj
         else:
