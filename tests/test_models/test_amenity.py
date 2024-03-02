@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This module contains the Place class
+Unittest for Amenity class.
 """
 from models.base_model import BaseModel
 import unittest
