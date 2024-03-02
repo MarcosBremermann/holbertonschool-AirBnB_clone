@@ -2,9 +2,13 @@
 """
 This module contains the Console and its methods
 """
+from datetime import datetime
+import os
 import cmd
 from models.base_model import BaseModel
-from models import storage
+from models.user import User
+import json
+
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
@@ -121,4 +125,7 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
 
 if __name__ == '__main__':
+    if not os.path.exists('file.json'):
+        with open('file.json', 'w') as f:
+            json.dump({}, f)
     HBNBCommand().cmdloop()

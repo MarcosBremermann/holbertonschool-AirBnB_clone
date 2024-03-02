@@ -3,6 +3,7 @@
 This is a file for the class FileStorage
 """
 from models.base_model import BaseModel
+from models.user import User
 import json
 from os import path
 
@@ -35,11 +36,14 @@ class FileStorage:
 
     def reload(self):
         """Deserializes the JSON file to __objects"""
-        if path.exists(self.__file_path):
-            with open(self.__file_path, "r") as file:
+        if path.exists(FileStorage.__file_path):
+            with open(FileStorage.__file_path, 'r') as file:
                 data = json.load(file)
-                for key, value in data.items():
-                    class_name, obj_id = key.split(".")
-                    cls = globals()[class_name]
-                    obj = cls(**value)
-                    self.__objects[key] = obj
+
+            for key, obj_data in data.items():
+                class_name, obj_id = key.split('.')
+                cls = globals()[class_name]
+                obj = cls(**obj_data)
+                FileStorage.__objects[key] = obj
+        else:
+            pass
