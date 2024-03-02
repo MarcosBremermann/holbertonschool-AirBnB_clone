@@ -1,13 +1,27 @@
 #!/usr/bin/python3
-#!/usr/bin/python3
 """
 This module contains the Console and its methods
 """
 import cmd
 from models.base_model import BaseModel
+from models import storage
+
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
+
+    def do_quit(self, arg):
+        """Quit command to exit the program"""
+        return True
+
+    def do_EOF(self, arg):
+        """Handles EOF"""
+        print()
+        return True
+
+    def emptyline(self):
+        """Do nothing on empty line"""
+        pass
 
     def do_create(self, arg):
         """Create a new instance of BaseModel"""
@@ -27,22 +41,85 @@ class HBNBCommand(cmd.Cmd):
         if not arg:
             print("** class name missing **")
             return
-        class_name, instance_id = args[0], args[1] if len(args) > 1 else None
         try:
-            cls = eval(class_name)
+            cls = eval(args[0])
         except NameError:
             print("** class doesn't exist **")
             return
-        if not instance_id:
+        if len(args) < 2:
             print("** instance id missing **")
             return
-        instance = None  # Get the instance from your storage system
-        if instance:
-            print(instance)
+        key = args[0] + '.' + args[1]
+        if key in storage.all():
+            print(storage.all()[key])
         else:
             print("** no instance found **")
 
-    # Implement other commands similarly
+    def do_destroy(self, arg):
+        """Deletes an instance based on the class name and id"""
+        args = arg.split()
+        if not arg:
+            print("** class name missing **")
+            return
+        try:
+            cls = eval(args[0])
+        except NameError:
+            print("** class doesn't exist **")
+            return
+        if len(args) < 2:
+            print("** instance id missing **")
+            return
+        key = args[0] + '.' + args[1]
+        if key in storage.all():
+            del storage.all()[key]
+            storage.save()
+        else:
+            print("** no instance found **")
+
+    def do_all(self, arg):
+        """Prints all string representation of all instances"""
+        args = arg.split()
+        if args and not args[0]:
+            print("** class name missing **")
+            return
+        try:
+            cls = eval(args[0])
+        except NameError:
+            print("** class doesn't exist **")
+            return
+        instances = []
+        for key, value in storage.all().items():
+            if args and key.split('.')[0] != args[0]:
+                continue
+            instances.append(str(value))
+        print(instances)
+
+    def do_update(self, arg):
+        """Updates an instance based on the class name and id"""
+        args = arg.split()
+        if not arg:
+            print("** class name missing **")
+            return
+        try:
+            cls = eval(args[0])
+        except NameError:
+            print("** class doesn't exist **")
+            return
+        if len(args) < 2:
+            print("** instance id missing **")
+            return
+        key = args[0] + '.' + args[1]
+        if key not in storage.all():
+            print("** no instance found **")
+            return
+        if len(args) < 3:
+            print("** attribute name missing **")
+            return
+        if len(args) < 4:
+            print("** value missing **")
+            return
+        setattr(storage.all()[key], args[2], args[3])
+        storage.save()
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
